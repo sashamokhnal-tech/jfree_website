@@ -1,0 +1,863 @@
+
+:root{
+  --bg:#0a0e12;
+  --bg-alt:#0d1318;
+  --text:#e6e7eb;
+  --muted:#9aa4b2;
+  --brand:#0f8a4b;
+  --brand-2:#0b6d3c;
+  --brand-3:#0ca35a;
+  --border:#182029;
+  --card:#0c1116;
+  --shadow: 0 10px 30px rgba(0,0,0,.35);
+}
+:root.light{
+  --bg:#ffffff; --bg-alt:#f6faf8; --text:#0e141a; --muted:#4b5563;
+  --brand:#0b8748; --brand-2:#0b6d3c; --brand-3:#0ca35a; --border:#e2e8f0; --card:#ffffff;
+  --shadow: 0 10px 24px rgba(2,6,23,.08);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", sans-serif; background:var(--bg); color:var(--text)}
+.container{width:min(1100px,92%);margin-inline:auto}
+.section{padding:64px 0}
+.section.alt{background:var(--bg-alt)}
+.grid-2{display:grid;grid-template-columns:1.1fr .9fr;gap:24px}
+@media (max-width:900px){.grid-2{grid-template-columns:1fr}}
+img{max-width:100%;height:auto;display:block}
+
+.btn{display:inline-block;padding:.85rem 1.1rem;border-radius:14px;border:1px solid var(--brand);text-decoration:none;color:var(--text);font-weight:700;box-shadow:var(--shadow);transition:transform .18s ease, box-shadow .25s ease, background .25s ease, border-color .25s ease, filter .25s ease;will-change:transform,box-shadow,filter}
+.btn:active{transform:scale(.98)}
+.btn--primary, .btn--secondary{background-image:linear-gradient(135deg,var(--brand) 0%, var(--brand-3) 60%, var(--brand) 100%);border-color:color-mix(in oklab, var(--brand) 80%, var(--brand-2))}
+.btn--ghost{background:transparent;border-color:color-mix(in oklab, var(--brand) 40%, var(--border))}
+.btn:hover, .btn:focus{transform:translateY(-1px);box-shadow:0 0 0 1px color-mix(in oklab, var(--brand) 70%, transparent), 0 10px 30px rgba(0,0,0,.35), 0 0 14px color-mix(in oklab, var(--brand) 45%, transparent);outline:none;filter:saturate(1.08)}
+
+.site-header{position:sticky;top:0;backdrop-filter:blur(8px) saturate(140%);background:color-mix(in oklab,var(--bg) 85%, transparent);z-index:50;border-bottom:1px solid var(--border)}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:10px 0}
+.brand{display:flex;align-items:center;gap:.6rem;color:var(--text);text-decoration:none;font-weight:800}
+.brand span{background:linear-gradient(135deg,var(--brand) 0%, var(--brand-3) 50%, var(--brand) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.menu__toggle{display:none}
+.menu__list{display:flex;gap:18px;align-items:center;list-style:none;margin:0;padding:0}
+.menu__list a{color:var(--text);text-decoration:none;font-weight:600}
+.menu__list a.active{color:var(--brand-3);border-bottom:2px solid var(--brand-3)}
+.theme-btn{border:1px solid var(--border);background:transparent;border-radius:10px;padding:.5rem .7rem}
+@media (max-width:860px){
+  .menu__toggle{display:inline-block;border:1px solid var(--border);background:transparent;color:var(--text);padding:.6rem .8rem;border-radius:10px}
+  .menu__list{position:absolute;right:4%;top:56px;background:var(--bg-alt);border:1px solid var(--border);border-radius:12px;padding:10px;display:none;flex-direction:column}
+  .menu__list.open{display:flex}
+}
+
+.hero{padding-top:72px position:relative;}
+.hero__inner{display:grid;grid-template-columns:1.1fr .9fr;gap:30px;align-items:center}
+.hero h1{font-size:clamp(28px,4.6vw,52px);line-height:1.1;margin:0 0 10px}
+.lead{color:var(--muted);margin:0 0 18px}
+.hero__image{border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:var(--shadow)}
+
+.socials{display:flex;gap:14px;flex-wrap:wrap;padding:0;margin:14px 0 0;list-style:none}
+.socials a{text-decoration:none;color:var(--text);border:1px solid var(--border);padding:.5rem .7rem;border-radius:10px}
+.badges{display:flex;gap:12px;flex-wrap:wrap;margin:10px auto 0}
+.badge{border:1px solid var(--border);border-radius:999px;padding:.35rem .7rem;font-weight:600;background:color-mix(in oklab,var(--bg) 80%, transparent)}
+
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;box-shadow:var(--shadow)}
+.stat{font-size:1.6rem;font-weight:800;margin:.3rem 0}
+@media (max-width:900px){.cards{grid-template-columns:1fr}}
+
+.steps{margin:0 0 1rem 1.1rem}
+.muted{color:var(--muted)}
+
+.chart-embed{position:relative}
+.chart-embed iframe{width:100%;height:clamp(320px, 52vw, 420px);border:0;border-radius:12px}
+.chart-loader{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:color-mix(in oklab,var(--bg) 70%, transparent);font-weight:700;letter-spacing:.2px}
+.chart-loader::before{content:"";width:18px;height:18px;margin-right:10px;border-radius:50%;border:3px solid color-mix(in oklab,var(--brand) 70%, transparent);border-top-color:var(--brand);animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.site-footer{border-top:1px solid var(--border);padding:22px 0}
+.footer__inner{display:flex;align-items:center;justify-content:space-between}
+.top{text-decoration:none;color:var(--text)}
+
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease, transform .6s ease}
+.reveal.in{opacity:1;transform:translateY(0)}
+
+
+/* Socials as buttons */
+.socials--buttons{gap:10px}
+.btn--pill{border-radius:999px;padding:.55rem .9rem}
+.soc--tg{}
+.soc--x{}
+.soc--ds{}
+.soc--ss{}
+/* Slight stronger glow for social buttons on hover */
+.socials--buttons .btn:hover, .socials--buttons .btn:focus{
+  box-shadow: 0 0 0 1px color-mix(in oklab, var(--brand) 75%, transparent),
+             0 10px 30px rgba(0,0,0,.38),
+             0 0 16px color-mix(in oklab, var(--brand) 55%, transparent);
+}
+
+
+/* --- Social buttons with icons & brand colors --- */
+.socials--buttons .btn{display:inline-flex;align-items:center;gap:.45rem}
+.icon{display:inline-block;width:18px;height:18px}
+.icon svg{display:block;width:100%;height:100%;border-radius:50%}
+/* Color the icon's circle per network */
+.i-tg svg circle{fill:#229ED9}
+.i-x  svg circle{fill:#111111}
+.i-ds svg circle{fill:#6C5CE7} /* purple-ish */
+.i-ss svg circle{fill:#F59E0B} /* amber */
+.i-jup svg circle{fill:#14B8A6} /* teal */
+
+/* --- Floating Buy button --- */
+.fab-buy{
+  position:fixed; right:18px; bottom:18px; z-index:60;
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:.85rem 1.1rem; border-radius:999px; text-decoration:none;
+  font-weight:800; color:var(--text); border:1px solid color-mix(in oklab, var(--brand) 70%, var(--brand-2));
+  background-image: linear-gradient(135deg, var(--brand) 0%, var(--brand-3) 60%, var(--brand) 100%);
+  box-shadow: 0 0 0 1px color-mix(in oklab, var(--brand) 55%, transparent),
+             0 10px 30px rgba(0,0,0,.35),
+             0 0 16px color-mix(in oklab, var(--brand) 45%, transparent);
+  transition: transform .18s ease, box-shadow .25s ease, filter .25s ease;
+}
+.fab-buy:hover,.fab-buy:focus{ transform:translateY(-1px); filter:saturate(1.08);
+  box-shadow: 0 0 0 1px color-mix(in oklab, var(--brand) 75%, transparent),
+             0 10px 32px rgba(0,0,0,.40),
+             0 0 18px color-mix(in oklab, var(--brand) 55%, transparent);
+}
+@media (max-width:520px){
+  .fab-buy{ right:12px; bottom:12px; padding:.75rem 1rem }
+}
+
+
+/* Jupiter button highlight */
+.soc--jup .icon svg circle{fill:#14B8A6}
+
+
+/* Remove icon SVG sizing */
+.socials--buttons .btn{gap:.45rem}
+.icon, .icon svg{display:none}
+.powered{font-size:.85rem;color:var(--muted);margin-top:8px}
+
+
+/* Transparent glass effect for social buttons */
+.socials--buttons .btn{
+  background:color-mix(in oklab, var(--bg-alt) 35%, transparent);
+  backdrop-filter:blur(6px) saturate(160%);
+  -webkit-backdrop-filter:blur(6px) saturate(160%);
+  border:1px solid color-mix(in oklab, var(--brand) 35%, var(--border));
+  color:var(--text);
+}
+/* On hover keep transparent but glow green */
+.socials--buttons .btn:hover, .socials--buttons .btn:focus{
+  background:color-mix(in oklab, var(--bg-alt) 20%, transparent);
+  box-shadow:0 0 0 1px color-mix(in oklab, var(--brand) 75%, transparent),
+             0 10px 30px rgba(0,0,0,.38),
+             0 0 16px color-mix(in oklab, var(--brand) 55%, transparent);
+}
+
+/* Footer link style */
+.powered-link{text-decoration:none;color:var(--brand-3)}
+.powered-link:hover{text-decoration:underline}
+
+
+/* Make hero block logo image 40% transparent */
+.hero__image img{opacity:0.6}
+
+
+/* Hero image hover/tap full opacity */
+.hero__image img{
+  opacity:0.6;
+  transition:opacity .3s ease;
+}
+.hero__image img:hover,
+.hero__image img:active{
+  opacity:1;
+}
+
+
+/* === Site-wide blurred background === */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-2;
+  background-image:url('assets/site-bg.jpg');
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+  filter: blur(10px);
+  transform: translateZ(0); /* ensure GPU layer to reduce paint cost */
+}
+/* subtle dark overlay for readability */
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  background: linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.45));
+  pointer-events:none;
+}
+
+
+/* Override blur to 5px */
+body::before{filter: blur(5px) !important;}
+
+
+/* Override blur to 3px */
+
+
+
+/* Header SOL price ticker */
+.sol-ticker{
+  font-weight:800; letter-spacing:.2px;
+  padding:.35rem .6rem; border-radius:999px;
+  background: color-mix(in oklab, var(--bg-alt) 35%, transparent);
+  backdrop-filter: blur(6px) saturate(160%);
+  -webkit-backdrop-filter: blur(6px) saturate(160%);
+  border:1px solid color-mix(in oklab, var(--brand) 35%, var(--border));
+}
+@media (max-width: 560px){
+  .sol-ticker{ display:none; }
+}
+
+
+/* Memes gallery */
+.meme-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media (max-width:1024px){.meme-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:640px){.meme-grid{grid-template-columns:1fr}}
+.meme{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
+.meme img{width:100%;height:auto;display:block}
+.meme figcaption{display:flex;justify-content:flex-end;padding:10px}
+.meme-dl{backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);background:color-mix(in oklab,var(--bg-alt) 35%, transparent)}
+
+
+/* SPA views */
+.hidden{display:none !important}
+#memes .memes-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+#memes{min-height:calc(100vh - 140px)} /* header+footer approx */
+
+
+/* Lightbox styles */
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center;z-index:80}
+.lightbox.hidden{display:none !important}
+.lightbox__img{max-width:92vw;max-height:80vh;border-radius:12px;border:1px solid var(--border);box-shadow:var(--shadow);background:var(--bg)}
+.lightbox__close{position:absolute;top:18px;right:18px;background:transparent;border:1px solid var(--border);color:var(--text);font-size:28px;line-height:1;border-radius:10px;padding:.25rem .55rem}
+.lightbox__dl{position:absolute;bottom:18px;right:18px}
+
+
+/* === Hero: single-column + larger, styled description === */
+.hero__inner{grid-template-columns:1fr !important}
+.hero__image{display:none}
+.lead--xl{
+  font-size: clamp(18px, 2.2vw, 24px);
+  line-height: 1.55;
+  font-weight: 600;
+  background: linear-gradient(135deg, var(--text), color-mix(in oklab, var(--text) 85%, var(--brand-3)));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+
+/* Tokenomics centered and no gray background */
+#tokenomics{ background: transparent !important; }
+#tokenomics .container{ text-align:center; }
+#tokenomics .cards{ grid-template-columns: 1fr; max-width: 460px; margin: 0 auto; }
+#tokenomics .card{ margin-inline:auto; }
+
+/* Dextools social button brand hint (optional circle removed per earlier request) */
+.soc--dx{}
+
+/* "Chart" nav button green when clicked */
+.menu__list a.chart-pressed{
+  color:#ffffff !important;
+  background: var(--brand);
+  border-radius: 10px;
+  padding: .25rem .5rem;
+  border: 1px solid color-mix(in oklab, var(--brand) 90%, var(--brand-2));
+  box-shadow: 0 0 0 1px color-mix(in oklab, var(--brand) 70%, transparent),
+             0 10px 28px rgba(0,0,0,.35),
+             0 0 12px color-mix(in oklab, var(--brand) 45%, transparent);
+}
+
+
+/* Active Chart link stays green while section is in view */
+.menu__list a[href="#charts"].active{
+  color:#ffffff !important;
+  background: var(--brand);
+  border-radius: 10px;
+  padding: .25rem .5rem;
+  border: 1px solid color-mix(in oklab, var(--brand) 90%, var(--brand-2));
+  box-shadow: 0 0 0 1px color-mix(in oklab, var(--brand) 70%, transparent),
+             0 10px 28px rgba(0,0,0,.35),
+             0 0 12px color-mix(in oklab, var(--brand) 45%, transparent);
+}
+
+
+/* All active nav items turn green while their sections are in view */
+.menu__list a.active{
+  color:#ffffff !important;
+  background: var(--brand);
+  border-radius: 10px;
+  padding: .25rem .5rem;
+  border: 1px solid color-mix(in oklab, var(--brand) 90%, var(--brand-2));
+  box-shadow: 0 0 0 1px color-mix(in oklab, var(--brand) 70%, transparent),
+             0 10px 28px rgba(0,0,0,.35),
+             0 0 12px color-mix(in oklab, var(--brand) 45%, transparent);
+}
+
+
+/* Smooth transitions for nav pills */
+.menu__list a{
+  transition: color .2s ease, background .25s ease, box-shadow .25s ease, border-color .25s ease, transform .2s ease;
+  position: relative;
+}
+
+/* Pop-in + glow animation when a link becomes active */
+@keyframes navPillPop {
+  0%   { transform: translateY(2px) scale(.96); box-shadow: 0 0 0 0 rgba(0,0,0,0), 0 0 0 0 rgba(0,0,0,0), 0 0 0 0 rgba(0,0,0,0); }
+  60%  { transform: translateY(0) scale(1.02); }
+  100% { transform: translateY(0) scale(1); }
+}
+.menu__list a.active{
+  animation: navPillPop .28s ease-out;
+}
+
+/* Optional subtle sheen sweep on activate */
+@keyframes navPillSheen {
+  0% { background-position: 120% 0; }
+  100% { background-position: -20% 0; }
+}
+.menu__list a.active{
+  background-image:
+    linear-gradient(135deg, var(--brand) 0%, var(--brand-3) 60%, var(--brand) 100%),
+    linear-gradient(90deg, rgba(255,255,255,.18) 0%, rgba(255,255,255,0) 40%, rgba(255,255,255,.18) 80%);
+  background-blend-mode: overlay, normal;
+  background-size: 100% 100%, 220% 100%;
+  background-position: 0 0, 120% 0;
+  animation: navPillPop .28s ease-out, navPillSheen .7s ease-out forwards;
+}
+
+/* Keep hover interaction for non-active items pleasant */
+.menu__list a:not(.active):hover{
+  border-bottom: 2px solid var(--brand-3);
+}
+
+
+/* === Springier active nav pill + brighter, longer sheen === */
+@keyframes navPillSpring {
+  0%   { transform: translateY(2px) scale(1.10); }
+  35%  { transform: translateY(0) scale(0.95); }
+  70%  { transform: translateY(0) scale(1.05); }
+  100% { transform: translateY(0) scale(1.00); }
+}
+@keyframes navPillSheenStrong {
+  0%   { background-position: 140% 0; }
+  100% { background-position: -40% 0; }
+}
+.menu__list a.active{
+  /* keep existing green styles from earlier */
+  animation: navPillSpring .45s ease-out, navPillSheenStrong 1.2s ease-out forwards;
+  background-image:
+    linear-gradient(135deg, var(--brand) 0%, var(--brand-3) 60%, var(--brand) 100%),
+    /* brighter sheen line */
+    linear-gradient(90deg, rgba(255,255,255,.28) 0%, rgba(255,255,255,0) 45%, rgba(255,255,255,.24) 90%);
+  background-blend-mode: overlay, normal;
+  background-size: 100% 100%, 240% 100%;
+  background-position: 0 0, 140% 0;
+}
+
+
+/* Pill background for How to Buy */
+.howto-pill{
+  backdrop-filter: blur(6px) saturate(160%);
+  -webkit-backdrop-filter: blur(6px) saturate(160%);
+  background: color-mix(in oklab, var(--bg-alt) 35%, transparent);
+  border: 1px solid color-mix(in oklab, var(--brand) 35%, var(--border));
+  border-radius: 40px;
+  padding: 2rem;
+  box-shadow: 0 0 0 1px color-mix(in oklab, var(--brand) 55%, transparent),
+             0 10px 30px rgba(0,0,0,.25),
+             0 0 16px color-mix(in oklab, var(--brand) 45%, transparent);
+}
+
+/* Tokenomics cards already center; three new ones will match style automatically */
+#tokenomics .cards{
+  grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+  justify-items:center;
+}
+
+
+/* --- How to Buy: glassy pill container --- */
+#howto .container, .howto-pill{
+  backdrop-filter: blur(6px) saturate(160%);
+  -webkit-backdrop-filter: blur(6px) saturate(160%);
+  background: color-mix(in oklab, var(--bg-alt) 35%, transparent);
+  border: 1px solid color-mix(in oklab, var(--brand) 35%, var(--border));
+  border-radius: 40px;
+  padding: 2rem;
+  overflow: hidden;
+  box-shadow: 0 0 0 1px color-mix(in oklab, var(--brand) 55%, transparent),
+             0 10px 30px rgba(0,0,0,.25),
+             0 0 16px color-mix(in oklab, var(--brand) 45%, transparent);
+}
+
+/* --- Tokenomics: all cards in one row on desktop --- */
+#tokenomics .container{ text-align:center; }
+#tokenomics .cards{
+  display:grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap:18px;
+  max-width: none;
+  margin: 0 auto;
+  justify-items: stretch;
+}
+#tokenomics .card{ width:100%; }
+@media (max-width: 900px){
+  #tokenomics .cards{ grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px){
+  #tokenomics .cards{ grid-template-columns: 1fr; }
+}
+
+
+/* === Glassy pill containers for ALL sections === */
+.section > .container{
+  backdrop-filter: blur(6px) saturate(160%);
+  -webkit-backdrop-filter: blur(6px) saturate(160%);
+  background: color-mix(in oklab, var(--bg-alt) 35%, transparent);
+  border: 1px solid color-mix(in oklab, var(--brand) 35%, var(--border));
+  border-radius: 40px;
+  padding: 2rem;
+  box-shadow: 0 0 0 1px color-mix(in oklab, var(--brand) 55%, transparent),
+             0 10px 30px rgba(0,0,0,.25),
+             0 0 16px color-mix(in oklab, var(--brand) 45%, transparent);
+}
+
+/* Avoid extra tight spacing with section padding */
+.section{ padding: 56px 0; }
+@media (max-width: 640px){
+  .section > .container{ padding: 1.4rem; border-radius: 28px; }
+}
+
+
+/* Center Live Stats section title */
+#stats h2{ text-align:center }
+
+
+/* Improve in-page scroll comfort with space for sticky header */
+section{ scroll-margin-top: 84px; }
+
+
+/* Circular avatar with green glow (glassy) */
+/* Clickable link wrapper + tooltip */
+/* Mail button (inherits existing glass pill styles) */
+.soc--mail{}
+
+
+/* Footer inline layout with Contact email button */
+.footer-inline{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:16px;
+  flex-wrap:wrap;
+  margin-top:1rem;
+}
+.footer-inline .footer-powered{
+  color:var(--text);
+  font-weight:600;
+}
+
+
+/* Contact email fixed in header (top-right) */
+header{ position: relative; }
+.header-contact{
+  position:absolute;
+  top: 10px;
+  right: 12px;
+  z-index: 120;
+}
+@media (max-width: 540px){
+  .header-contact{ top: 8px; right: 8px; }
+  .header-contact .btn{ padding: .45rem .6rem; font-size: .85rem; }
+}
+
+
+/* Meet the Team */
+#team h2{ text-align:center }
+.team-grid{justify-content:center;
+  display:grid;
+  grid-template-columns: repeat( 6, 1fr);
+  gap:18px;
+  align-items:stretch;
+
+  justify-items:center;}
+@media (max-width: 1100px){ .team-grid{justify-content:center; grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 700px){ .team-grid{justify-content:center; grid-template-columns: repeat(2, 1fr); } }
+.team-card{ display:flex; align-items:center; justify-content:center; }
+
+/* Circular avatar with green glow (glassy) */
+.avatar{
+  width: 140px; height: 140px; border-radius: 50%;
+  border: 1px solid color-mix(in oklab, var(--brand) 55%, var(--border));
+  background: color-mix(in oklab, var(--bg-alt) 35%, transparent);
+  position: relative; overflow: hidden;
+  display:flex; align-items:center; justify-content:center;
+  box-shadow: 0 0 0 1px color-mix(in oklab, var(--brand) 55%, transparent),
+             0 10px 30px rgba(0,0,0,.25),
+             0 0 18px color-mix(in oklab, var(--brand) 45%, transparent);
+  backdrop-filter: blur(6px) saturate(160%);
+  -webkit-backdrop-filter: blur(6px) saturate(160%);
+  transition: transform .18s ease, box-shadow .25s ease, filter .25s ease;
+}
+.avatar:hover, .avatar:focus{
+  transform: translateY(-2px);
+  box-shadow: 0 0 0 1px color-mix(in oklab, var(--brand) 75%, transparent),
+             0 16px 36px rgba(0,0,0,.35),
+             0 0 22px color-mix(in oklab, var(--brand) 65%, transparent);
+  filter: saturate(1.05);
+}
+.avatar span{
+  text-align:center; text-transform:uppercase; font-weight:800; letter-spacing:.5px;
+  color: var(--text); font-size:.9rem; line-height:1.15; opacity:.9;
+}
+
+/* Clickable link wrapper + tooltip */
+.team-link{
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: inherit;
+}
+.team-link::after{
+  content: "Coming Soon";
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translate(-50%, 8px);
+  opacity: 0;
+  pointer-events: none;
+  padding: .35rem .6rem;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: .75rem;
+  white-space: nowrap;
+  color: var(--text);
+  background: color-mix(in oklab, var(--bg-alt) 45%, transparent);
+  border: 1px solid color-mix(in oklab, var(--brand) 55%, var(--border));
+  box-shadow: 0 0 0 1px color-mix(in oklab, var(--brand) 55%, transparent),
+             0 10px 22px rgba(0,0,0,.24),
+             0 0 14px color-mix(in oklab, var(--brand) 50%, transparent);
+  backdrop-filter: blur(6px) saturate(160%);
+  -webkit-backdrop-filter: blur(6px) saturate(160%);
+  transition: opacity .2s ease, transform .2s ease;
+}
+.team-link:hover::after,
+.team-link:focus::after{
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+
+/* Team: make the pill container span the full width on desktop */
+#team .container{
+  max-width: none !important;
+  width: 100% !important;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+}
+/* Ensure all 7 circles fit comfortably in one row on large screens */
+@media (min-width: 1200px){
+  #team .team-grid{justify-content:center;
+    grid-template-columns: repeat(7, minmax(120px, 1fr));
+    gap: 20px;
+  }
+}
+
+
+/* Narrower Team pill and reduced gap */
+#team .container{
+  max-width: 90% !important;
+  width: 90% !important;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+@media (min-width: 1200px){
+  #team .team-grid{justify-content:center;
+    grid-template-columns: repeat(7, minmax(120px, 1fr));
+    gap: 12px; /* reduced gap */
+  }
+}
+
+
+/* Dynamic scroll offset for sticky header */
+:root{ --header-offset: 84px; }
+section{ scroll-margin-top: var(--header-offset); }
+
+/* === Consolidated bright green active nav pill (final override) === */
+.menu__list a.active{
+  color:#ffffff !important;
+  background: var(--brand);
+  border-radius: 12px;
+  padding: .3rem .6rem;
+  border: 1px solid color-mix(in oklab, var(--brand) 95%, var(--brand-2));
+  box-shadow: 0 0 0 1px color-mix(in oklab, var(--brand) 80%, transparent),
+             0 12px 34px rgba(0,0,0,.40),
+             0 0 18px color-mix(in oklab, var(--brand) 55%, transparent);
+  transition: all .3s ease-in-out;
+}
+
+
+/* Roadmap grid */
+.cards.roadmap{ grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 900px){ .cards.roadmap{ grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px){ .cards.roadmap{ grid-template-columns: 1fr; } }
+#roadmap h2{ text-align:center }
+
+/* main-centered width override */
+main .container{ width: min(900px, 92%) !important; margin-inline: auto; }
+
+/* --- Active nav subtle glow animation --- */
+@keyframes navActiveGlow {
+  0%   { box-shadow: 0 0 0 1px color-mix(in oklab, var(--brand) 65%, transparent),
+                   0 10px 28px rgba(0,0,0,.35),
+                   0 0 10px color-mix(in oklab, var(--brand) 40%, transparent); }
+  50%  { box-shadow: 0 0 0 1px color-mix(in oklab, var(--brand) 85%, transparent),
+                   0 12px 34px rgba(0,0,0,.40),
+                   0 0 16px color-mix(in oklab, var(--brand) 60%, transparent); }
+  100% { box-shadow: 0 0 0 1px color-mix(in oklab, var(--brand) 70%, transparent),
+                   0 10px 28px rgba(0,0,0,.35),
+                   0 0 12px color-mix(in oklab, var(--brand) 50%, transparent); }
+}
+.menu__list a.active{
+  animation-name: navPillSpring, navPillSheenStrong, navActiveGlow;
+  animation-duration: .45s, 1.2s, 2.6s;
+  animation-timing-function: ease-out, ease-out, ease-in-out;
+  animation-iteration-count: 1, 1, infinite;
+  animation-fill-mode: forwards, forwards, both;
+}
+@media (prefers-reduced-motion: reduce){
+  .menu__list a.active{ animation-name: none; }
+}
+
+
+/* Roadmap phases color accents */
+.cards.roadmap .card{ border:1px solid var(--glass-stroke, rgba(255,255,255,.12)); background: color-mix(in oklab, var(--surface) 92%, transparent); }
+.cards.roadmap .card.done{ outline: 1px solid color-mix(in oklab, var(--brand) 60%, transparent); box-shadow: 0 0 0 2px color-mix(in oklab, var(--brand) 18%, transparent) inset; }
+
+.cards.roadmap .card.phase-1{ background: color-mix(in oklab, #FFD6A5 22%, transparent); }
+.cards.roadmap .card.phase-2{ background: color-mix(in oklab, #BDE0FE 22%, transparent); }
+.cards.roadmap .card.phase-3{ background: color-mix(in oklab, #CDE8B9 22%, transparent); }
+.cards.roadmap .card.phase-4{ background: color-mix(in oklab, #E7D7FF 22%, transparent); }
+.cards.roadmap .card.phase-5{ background: color-mix(in oklab, #FFE3E3 22%, transparent); }
+
+/* Checkbox styling */
+.phase-check{
+  display:inline-flex; align-items:center; gap:.5rem;
+  font-size:.95rem; user-select:none; cursor:pointer;
+}
+.phase-check input[type="checkbox"]{
+  appearance:none; -webkit-appearance:none; width:18px; height:18px; border-radius:4px;
+  border:1.5px solid color-mix(in oklab, var(--brand) 60%, #8a8a8a);
+  background: color-mix(in oklab, var(--surface) 85%, transparent);
+  display:inline-grid; place-items:center; transition: all .18s ease;
+}
+.phase-check input[type="checkbox"]::before{
+  content:""; width:12px; height:12px; transform:scale(0);
+  clip-path: polygon(14% 44%, 0 62%, 46% 100%, 100% 22%, 84% 6%, 44% 58%);
+  background: color-mix(in oklab, var(--brand) 88%, white 8%);
+  transition: transform .18s ease;
+}
+.phase-check input[type="checkbox"]:checked{
+  border-color: color-mix(in oklab, var(--brand) 80%, #8a8a8a);
+  background: color-mix(in oklab, var(--brand) 20%, var(--surface) 80%);
+  box-shadow: 0 0 0 2px color-mix(in oklab, var(--brand) 16%, transparent) inset;
+}
+.phase-check input[type="checkbox"]:checked::before{ transform:scale(1); }
+.phase-check span{ opacity:.85 }
+
+
+/* Roadmap centering */
+#roadmap .cards.roadmap{
+  justify-content: center;
+  margin-inline: auto;
+  gap: 18px;
+}
+#roadmap .cards.roadmap .card{
+  max-width: 520px;
+}
+@media (min-width: 901px){
+  #roadmap .cards.roadmap{
+    max-width: 1160px; /* ~3 cards centered */
+  }
+}
+@media (max-width: 900px){
+  #roadmap .cards.roadmap{
+    max-width: 780px; /* ~2 cards centered */
+  }
+}
+@media (max-width: 560px){
+  #roadmap .cards.roadmap{
+    max-width: 520px; /* 1 card */
+  }
+}
+
+
+/* Completed badge */
+.status-completed{
+  display:inline-block;
+  font-size:.8rem;
+  padding:.18rem .5rem;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--brand) 18%, #18a34a 14%);
+  color: white;
+  vertical-align: middle;
+  letter-spacing:.2px;
+}
+/* emphasize done card */
+.cards.roadmap .card.done h3 .status-completed{
+  box-shadow: 0 0 0 1px color-mix(in oklab, var(--brand) 50%, transparent) inset;
+}
+
+
+
+/* Team metadata styling */
+.team-card{ flex-direction:column; gap:.5rem; }
+.team-meta{ text-align:center; line-height:1.15; }
+.team-meta h4{ margin:0; font-size:1rem; font-weight:700; }
+.team-meta p{ margin:.2rem 0 0; font-size:.85rem; opacity:.85; }
+#team .team-grid .avatar img{ width:100%; height:100%; object-fit:cover; }
+
+
+
+/* === $Jfree Game button (opens game in new tab) === */
+.btn--game{ 
+  position: relative;
+  border-radius: 999px;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+  text-transform: none;
+  backdrop-filter: blur(6px);
+  border: 1px solid color-mix(in oklab, var(--brand) 40%, var(--border));
+  box-shadow: 0 0 0 0 rgba(12, 163, 90, 0.45);
+  animation: jfreePulse 2.4s ease-in-out infinite;
+}
+.btn--game .coin{ 
+  margin-right: .55rem; 
+  font-weight: 900;
+}
+@keyframes jfreePulse {
+  0%   { box-shadow: 0 0 0 0 rgba(12,163,90,0.45); }
+  50%  { box-shadow: 0 0 18px 6px rgba(12,163,90,0.60); }
+  100% { box-shadow: 0 0 0 0 rgba(12,163,90,0.38); }
+}
+
+/* mobile tweaks for the button */
+@media (max-width: 640px){
+  .hero__actions .btn{ display:block; width:100%; text-align:center; }
+  .hero__actions .btn + .btn{ margin-top: .65rem; }
+}
+
+
+/* === Floating circular $Jfree Game button inside Hero === */
+.btn--game.btn--game-floating{
+  position: absolute;   /* relative to .hero */
+  top: 120px;           /* adjust if needed */
+  right: 40px;          /* adjust if needed */
+  width: 113px;         /* ~3 cm at 96dpi */
+  height: 113px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  line-height: 1.1;
+  text-align: center;
+  font-weight: 800;
+  z-index: 5;
+}
+
+/* Tweak inner content for circle layout */
+.btn--game.btn--game-floating .coin{
+  display:block;
+  font-size: 1.35rem;
+  margin: 0 0 .25rem 0;
+}
+
+/* Optional: smaller on very small screens */
+@media (max-width:520px){
+  .btn--game.btn--game-floating{
+    top: 96px;
+    right: 24px;
+    width: 96px;
+    height: 96px;
+  }
+}
+
+
+/* === $Jfree Game button patch === */
+#jfree-game {
+  position: relative;
+  left: -150px; /* shift left by 150px */
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+#jfree-game .btn-icon {
+  height: 24px;
+  width: 24px;
+  object-fit: contain;
+  display: inline-block;
+}
+@media (max-width: 768px) {
+  #jfree-game { left: 0; }
+}
+
+
+
+/* ensure no bullets/squares for the game button list item */
+#jfree-game, #jfree-game:before, #jfree-game:after { text-decoration: none; }
+#jfree-game { list-style: none; }
+nav li #jfree-game, .menu__list li #jfree-game { list-style: none; }
+
+
+
+/* === Round GAME button patch === */
+#jfree-game {
+  position: relative;
+  left: -150px;                 /* keep left shift */
+  width: 100px;                 /* diameter */
+  height: 100px;
+  border-radius: 50%;           /* round shape */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #ffffff;
+  background: transparent url('./images/game-button-logo.png') center center no-repeat;
+  background-size: 60%;         /* scale the logo in the circle */
+  border: none;
+  box-shadow: 0 0 0 2px rgba(0,0,0,0.2) inset; /* subtle ring; optional */
+}
+#jfree-game:hover { 
+  filter: brightness(1.05);
+  transform: translateY(-1px);
+}
+#jfree-game:active { 
+  transform: translateY(0);
+}
+@media (max-width: 768px){
+  #jfree-game { left: 0; width: 84px; height: 84px; font-size: 14px; }
+}
+
